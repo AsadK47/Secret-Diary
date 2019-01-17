@@ -19,4 +19,12 @@ The following commands are available to use
 4. diary.unlock
 ```
 
+## Running the tests & linter
+
+Once the repo is forked or cloned, cd into it and run the ```rspec``` command from the command line
+
+To run the linter, please run ```rubocop``` from the command line
+
 # Example of app in usage
+
+![](assets/README-9dac9f3e.png)
