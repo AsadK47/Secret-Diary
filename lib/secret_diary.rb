@@ -6,8 +6,7 @@ class Diary
 
   def add_entry(entry)
     fail "Diary is locked" if @lock
-    @entry += entry
-    @entry += "\n"
+    add_to_diary(entry)
   end
 
   def retrieve_entries
@@ -21,5 +20,12 @@ class Diary
 
   def unlock
     @lock = false
+  end
+
+  private
+
+  def add_to_diary(entry)
+    @entry += entry
+    @entry += "\n"
   end
 end
