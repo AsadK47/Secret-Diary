@@ -1,16 +1,15 @@
 class Diary
-
   def initialize
     @entry = ""
     @lock = true
   end
 
-  def add_entry(entry = "")
+  def add_entry(_entry = "")
     fail "Diary is locked" if @lock
     @entry = "Hi"
   end
 
-  def get_entries
+  def retrieve_entries
     fail "Diary is locked" if @lock
     @entry
   end
@@ -22,5 +21,4 @@ class Diary
   def unlock
     @lock = false
   end
-
 end
