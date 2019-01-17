@@ -13,8 +13,10 @@ diary = Diary.new
 
 The following commands are available to use
 ```
-1. subject.add_entry
-2. subject.get_entries
-3. subject.lock
-4. subject.unlock
+1. diary.add_entry("Your entry here")
+2. diary.get_entries
+3. diary.lock
+4. diary.unlock
 ```
+
+# Example of app in usage

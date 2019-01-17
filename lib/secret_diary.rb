@@ -4,14 +4,14 @@ class Diary
     @lock = true
   end
 
-  def add_entry(_entry = "")
+  def add_entry(entry)
     fail "Diary is locked" if @lock
-    @entry = "Hi"
+    @entry += entry
   end
 
   def retrieve_entries
     fail "Diary is locked" if @lock
-    @entry
+    puts @entry
   end
 
   def lock

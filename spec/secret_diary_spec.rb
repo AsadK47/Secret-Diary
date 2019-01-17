@@ -1,39 +1,52 @@
-require "secret_diary"
+require 'secret_diary'
 
 describe Diary do
-  describe "#add_entry" do
-    it { is_expected.to respond_to(:add_entry) }
+  subject(:diary) { described_class.new }
 
-    it "Adds an entry" do
-      subject.unlock
-      expect(subject.add_entry("Hi")).to eq("Hi")
-    end
-
-    it "Unable to add entry if locked" do
-      subject.lock
-      expect { subject.add_entry }.to raise_error "Diary is locked"
+  describe '#lock' do
+    it 'is expected to respond to lock' do
+      expect { diary.lock }.not_to raise_error
     end
   end
 
-  describe "#retrieve_entries" do
-    it { is_expected.to respond_to(:retrieve_entries) }
-
-    it "Retrieves entries with blank" do
-      subject.unlock
-      expect(subject.retrieve_entries).to eq ""
-    end
-
-    it "Unable to retrieve entry if locked" do
-      subject.lock
-      expect { subject.add_entry }.to raise_error "Diary is locked"
+  describe '#unlock' do
+    it 'is expected to respond to unlock' do
+      expect { diary.unlock }.not_to raise_error
     end
   end
 
-  describe "#lock" do
-    it { is_expected.to respond_to(:lock) }
+  describe '#add_entry' do
+    it 'is expected to respond to add_entry' do
+      diary.unlock
+      expect { diary.add_entry("Hi") }.not_to raise_error
+    end
+
+    it 'adds an entry to the diary' do
+      diary.unlock
+      diary.add_entry('Hi')
+      expect { diary.retrieve_entries }.to output("Hi\n").to_stdout
+    end
+
+    it 'unable to add entry if locked' do
+      diary.lock
+      expect { diary.add_entry('Hi') }.to raise_error 'Diary is locked'
+    end
   end
 
-  describe "#unlock" do
-    it { is_expected.to respond_to(:unlock) }
+  describe '#retrieve_entries' do
+    it 'is expected to respond to retrieve_entries' do
+      diary.unlock
+      expect { diary.retrieve_entries }.not_to raise_error
+    end
+
+    it 'retrieves entries with blank if no entries added' do
+      diary.unlock
+      expect { diary.retrieve_entries }.to output("\n").to_stdout
+    end
+
+    it 'unable to retrieve entry if locked' do
+      diary.lock
+      expect { diary.retrieve_entries }.to raise_error 'Diary is locked'
+    end
   end
 end
