@@ -27,7 +27,8 @@ describe Diary do
       expect { diary.retrieve_entries }.to output("Hi\n").to_stdout
     end
 
-    it 'unable to add entry if locked' do
+    it 'is unable to add entry if locked' do
+      diary.unlock
       diary.lock
       expect { diary.add_entry('Hi') }.to raise_error 'Diary is locked'
     end
